@@ -83,7 +83,11 @@ function compile() {
     reader.onload = (e) => {
         var blob = new Uint8Array(e.target.result);
 		var compy = new Compiled(blob);
-		compy.execute();
+		try {
+			compy.execute();
+		} catch(err) {
+			compy.VAR_ER=9001;
+		}
 		if (compy.VAR_ER==0) {
 			var size = compy.VAR_E-compy.VAR_S;
 			var result = new Uint8Array(size+2)
@@ -97,7 +101,7 @@ function compile() {
 			dl.setAttribute('download', "+"+file.name);
 			dl.setAttribute('href', window.URL.createObjectURL(blob));
 			dl.style.display = 'none';
-			out.innerHTML = "Compilation succesful!<br/>memory used:"+compy.VAR_S+" - "+compy.VAR_E;
+			out.innerHTML = "Compilation succesful!<br/>Memory used: "+compy.VAR_S+" - "+compy.VAR_E;
 			document.body.appendChild(dl);
 			dl.click();
 			document.body.removeChild(dl);

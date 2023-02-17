@@ -295,8 +295,8 @@ return str.substr(0, index) + replacement+ str.substr(index + replacement.length
 this.createCharsetMapping = function() {
 var sb="";
 sb+="@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_ !\"#$%&'()*+,-./0123456789:;<=>?`abcdefghijklmnopqrstuvwxyz{|}~";
-sb+=" ЎўЈ¤Ґ¦§Ё©Є«¬­®Ї°±Ііґµ¶·ё№є»јЅѕї";
-sb+="АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя";
+sb+="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+sb+="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 for (var i = 0; i < 32; i++) {
 sb+=String.fromCharCode(i + 128);
 }
@@ -310,13 +310,13 @@ sb+=String.fromCharCode(i + 287);
 }
 sb+="[\\]^_ !\"#$%&'()*+,-./0123456789:;<=>?`";
 sb+="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-sb+="{|}~ ЎўЈ¤Ґ¦§Ё©Є«¬­®Ї°±Ііґµ¶·ё№є»јЅѕїА";
+sb+="{|}~пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 for (var i = 0; i < 26; i++) {
 sb+=String.fromCharCode(i + 313);
 }
-sb+="ЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя";
+sb+="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 sb+=String.fromCharCode(128);
-sb+="БВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪ";
+sb+="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 for (var i = 27; i < 32; i++) {
 sb+=String.fromCharCode(i + 128);
 }
@@ -325,10 +325,10 @@ for (var i = 0; i < 31; i++) {
 sb+=String.fromCharCode(i + 256);
 }
 _selfy.setCharAt(sb, 94 + 256, '?');
-_selfy.setCharAt(sb,95 + 256, 'њ');
+_selfy.setCharAt(sb,95 + 256, 'пїЅ');
 _selfy.setCharAt(sb,105 + 256, '?');
 _selfy.setCharAt(sb,122 + 256, '?');
-_selfy.setCharAt(sb,94 + 128 + 256, '¦');
+_selfy.setCharAt(sb,94 + 128 + 256, 'пїЅ');
 _selfy.setCharAt(sb,95 + 128 + 256, '?');
 _selfy.setCharAt(sb,105 + 128 + 256, '?');
 _selfy.setCharAt(sb,122 + 128 + 256, '?');
@@ -345,7 +345,7 @@ this.fillMap = function() {
 _selfy.add(32, "space");
 _selfy.add(144, "black", "blk", "ctrl-1");
 _selfy.add(5, "white", "wht", "ctrl-2", "ctrl-e");
-_selfy.add(28, "red", "ctrl-3", "ctrl-pound", "ctrl-Ј");
+_selfy.add(28, "red", "ctrl-3", "ctrl-pound", "ctrl-пїЅ");
 _selfy.add(159, "cyan", "cyn", "ctrl-4");
 _selfy.add(156, "purple", "pur", "pink", "cm-3");
 _selfy.add(30, "green", "grn", "ctrl-6", "ctrl-up arrow", "ctrl-?");
@@ -384,7 +384,7 @@ _selfy.add(137, "f2", "shift-f1", "sh-f1");
 _selfy.add(138, "f4", "shift-f3", "sh-f3");
 _selfy.add(139, "f6", "shift-f5", "sh-f5");
 _selfy.add(140, "f8", "shift-f7", "sh-f7");
-_selfy.add(92, "pound", "Ј");
+_selfy.add(92, "pound", "пїЅ");
 _selfy.add(160, "shift-space", "sh-space");
 _selfy.add(33, "shift-1", "sh-1");
 _selfy.add(34, "shift-2", "sh-2");
@@ -420,8 +420,8 @@ _selfy.add(164, "cm-@", "cm-at");
 _selfy.add(165, "cm-g");
 _selfy.add(166, "cm-+", "cm-plus");
 _selfy.add(167, "cm-m");
-_selfy.add(168, "cm-Ј", "cm-pound");
-_selfy.add(169, "shift-Ј", "shift-pound", "sh-Ј", "sh-pound");
+_selfy.add(168, "cm-пїЅ", "cm-pound");
+_selfy.add(169, "shift-пїЅ", "shift-pound", "sh-пїЅ", "sh-pound");
 _selfy.add(170, "cm-n");
 _selfy.add(171, "cm-q");
 _selfy.add(172, "cm-d");
@@ -5659,6 +5659,9 @@ var fp=this.disk.get(this.C_REG);
 this.A_REG=fp.readString();
 }
 this.GETSTRCHANNEL = function() {
+if (this.blobCount>65536) {
+    throw "out of range!";
+}
 this.A_REG=String.fromCharCode(this.blob[this.blobCount++]);
 }
 this.GETNUMBERCHANNEL = function() {
