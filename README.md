@@ -14,3 +14,5 @@ So it runs and compiles natively in your browser.
 To use it, just download the project and open the index.html in your browser.
 The basic-directory contains the original sources (with the bas-version being slightly modified).
 These aren't needed just to run the program.
+
+Here's an online version: https://jpct.de/mc/
