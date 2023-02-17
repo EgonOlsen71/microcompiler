@@ -62,7 +62,7 @@
 610 get  #2,s1$,s2$:t=asc(s1$+z$)+asc(s2$+z$)*256
 620 s(m)=t:l(m)=a:m=m+1: print  "{left}";t;
 630 if  f then  t=a-f: poke  f+1,t-2: poke  f+7,t-8: poke  f+9,t-10:f=0
-640 j=828: if  peek(653) then  640
+640 j=828
 650 get  #2,b$: if  st then  1920
 660 b=asc(b$+z$): poke  j,b: if  q or  b<>32 then  j=j+1
 670 if  b=34 then  q= not  q

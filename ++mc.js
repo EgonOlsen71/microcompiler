@@ -2109,16 +2109,8 @@ this.line_640 = function() {
 this.Y_REG=this.CONST_61;
 this.VAR_J=this.Y_REG;
 //
-this.X_REG=Math.floor(this._memory[653]) & 255;
-if ((this.X_REG==this.CONST_2?0:1)==1) {
-return "NSKIP109";}
+
 return "SKIP109";
-} 
-//
-this.NSKIP109 = function() {
-return 640;
-//
-return 650;
 } 
 //
 this.SKIP109 = function() {
