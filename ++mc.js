@@ -1631,6 +1631,10 @@ this.NSKIP98 = function() {
 this.A_REG=this.CONST_47;
 this.STROUT();
 //
+if (this.VAR_ER>1000) {
+    throw "too many errors!";
+}
+//
 this.Y_REG=this.CONST_48;
 this.X_REG=this.VAR_U;
 this.X_REG=this.X_REG-this.Y_REG;
