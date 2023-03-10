@@ -5426,7 +5426,7 @@ return;
 var cc=this.B_REG.charCodeAt(0);
 var c=this.B_REG.charAt(0);
 if (c>='a' && c<='z') {
-cc-=32;
+//cc-=32;
 }
 this.X_REG=cc;
 }
