@@ -1,0 +1,139 @@
+<html>
+<head>
+	<title>Micro Compiler - by Vic Cortes & EgonOlsen71</title>
+	<script id='_compiledCode' src='++mc.js' type='text/javascript'></script>
+	<style>
+	body {
+	  background-color: black;
+	  color: lightgrey;
+	  font-family: monospace;
+	  font-size: 130%;
+	}
+
+	h2 {
+	  color: lightgreen;
+	}
+
+	h3 {
+	  color: yellow;
+	}
+
+	a {
+		color: yellow;
+	}
+
+	p {
+		color: lightgrey;
+	}
+
+	p a {
+		color: lightgrey;
+	}
+
+	input,
+	select,
+	button,
+	textarea {
+	  font-size: 110%;
+	}
+	</style>
+</head>
+<body>
+<h2>Micro Compiler</h2>
+<h3>by Vic Cortes, published in <a target="_blank" href="mikrocompiler.pdf">RUN 07/86</a></h3>
+<h3>Compiled to Javascript using <a target="_blank" href="https://www.c64-wiki.com/wiki/MOSpeed">MOSpeed by EgonOlsen71</a></h3>
+<p>
+	Originally coded in BASIC V2, this is a so called "micro compiler" for the Commodore 64.<br/>
+	It compiles a sub-set of BASIC V2 into quite fast machine code. You can find more details<br/>
+	in the <a target="_blank" href="mikrocompiler.pdf">(german) description</a> from back in the days.<br/>
+</p>
+<p>
+	This version has been compiled from BASIC V2 into Javascript using MOSpeed.<br/>
+	So it runs and compiles natively in your browser.
+</p>
+<p>
+	Error handling of this version is quite limited. It will detect and report errors,<br/>but it won't display exactly where they were.
+</p>
+<p>
+	The compiler takes PRG files only. Here are two examples written in BASIC V2 that you can use for testing:
+	<ul>
+		<li><a href="compilertest.prg">Compiler-Test</a></li>
+		<li><a href="farbdemo.prg">Colordemo</a></li>
+		<li><a href="filler.prg">Flood fill (only works properly when compiled!)</a></li>
+	</ul>
+</p>
+<p>
+	Enough talking, let's compile some things...<br/><br/>
+</p>
+<p>
+<form name="fileselect" enctype="multipart/form-data">
+	<input type="file" name="prg" id="prg" /><br/><br/>
+	<button type="button" onclick="compile()">Compile</button>
+</form>
+</p>
+<p id="output"></p>
+
+<script>
+function compile() {
+  var files = document.getElementById("prg").files;
+  var out = document.getElementById("output");
+  out.innerHTML = "";
+  for(var file of files) {
+	console.log("Compiling: "+file.name);
+    var reader = new FileReader();
+    reader.onload = (e) => {
+        var blob = new Uint8Array(e.target.result);
+		var compy = new Compiled(blob);
+		try {
+			compy.execute();
+		} catch(err) {
+			compy.VAR_ER=9001;
+		}
+		if (compy.VAR_ER==0) {
+			var size = compy.VAR_E-compy.VAR_S;
+			var result = new Uint8Array(size+2)
+			result[0]=compy.VAR_S & 255;
+			result[1]=compy.VAR_S >> 8;
+			for(var i=0; i<size; i++) {
+				result[i+2]=compy._memory[i+compy.VAR_S];
+			}
+			blob = new Blob([result.buffer], {type: "application/octet-binary"});
+			runOnUltimate(blob)
+
+			var dl = document.createElement('a');
+			dl.setAttribute('download', "+"+file.name);
+			dl.setAttribute('href', window.URL.createObjectURL(blob));
+			dl.style.display = 'none';
+			out.innerHTML = "Compilation succesful!<br/>Memory used: "+compy.VAR_S+" - "+compy.VAR_E;
+			document.body.appendChild(dl);
+			dl.click();
+			document.body.removeChild(dl);
+		} else {
+			out.innerHTML = "Compilation failed with "+compy.VAR_ER+" errors!<br/>Check your input program!";
+			alert("Compilation failed with "+compy.VAR_ER+" errors!");
+		}
+    };
+	reader.readAsArrayBuffer(file);
+  }
+}
+
+
+function runOnUltimate(blob){
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var data = new FormData();
+        data.append('data', event.target.result);
+
+        var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'http://ultimate-64/v1/runners:run_prg', true);
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.onload = function(){
+			console.log(this.responseText);
+		}
+		xhr.send(data);
+    };
+    reader.readAsDataURL(blob);
+}
+</script>
+</body>
+</html>
